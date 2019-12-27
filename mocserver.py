@@ -20,6 +20,13 @@ def friendsget(args):
                 'items' : [10, 12, 33, 46]
             }
         }
+    elif args['user_id'] == '3':
+        js = {
+            'error' : {
+                'error_code' : 201,
+                'error+msg' : 'permissoin denied'
+            }
+        }
     return js
 
 def mymethod(name : str):
