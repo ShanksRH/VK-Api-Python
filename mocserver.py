@@ -28,10 +28,10 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             method = mymethod(splited[0])
             if len(splited) != 2:
                 js = { 'error' : {'error_msg' : 'incorrect number of "?"'} }
-                response = 202
+                response = 201
             elif method == None:
                 js = { 'error' : {'error_msg' : 'unknown method'} }
-                response = 203
+                response = 201
             else:
                 splited = splited[1].split('&')
                 args = []
@@ -42,11 +42,15 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                         args.append(t)
                     else:
                         js = { 'error' : {'error_msg' : 'incorrect number of "=" in ' + a} }
-                        response = 203
+                        response = 201
                         break
                 else:
-                    js = {'others' : 'ok'}
-                    response = 200
+                    if args[-1][0] != 'access_token':
+                        js = { 'error' : {'error_msg' : 'invalid access token argument'} }
+                        response = 201
+                    else:
+                        js = {'others' : 'ok'}
+                        response = 200
         self.send_response(response)
         self.end_headers()
         self.wfile.write(json.dumps(js).encode())

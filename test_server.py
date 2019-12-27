@@ -45,6 +45,14 @@ class TestMocHandler(unittest.TestCase):
             self.assertEqual(js['error']['error_msg'], 'incorrect number of "=" in user_id=0=1')
         except:
             self.assertTrue(False)
+    
+    def test_doget_if_no_token(self):
+        response = requests.get(url + 'method/friends.get?user_id=0&v=5.61')
+        try:
+            js = json.loads(response.text)
+            self.assertEqual(js['error']['error_msg'], 'invalid access token argument')
+        except:
+            self.assertTrue(False)
 
 if __name__ == "__main__":
     
