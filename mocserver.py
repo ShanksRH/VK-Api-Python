@@ -122,7 +122,7 @@ def groupsget(args):
 
 def groupsgetbyid(args):
     js = {}
-    if args['group_id'] == '133':
+    if args['group_ids'] == '133':
         js = {
             'response' : [{
                 'id' : 133,

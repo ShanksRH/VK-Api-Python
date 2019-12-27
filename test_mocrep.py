@@ -36,7 +36,7 @@ class TestRepositories(unittest.TestCase):
     
     def test_get_group_info(self):
         rep = mocrepository.MocGroupsRepository(url)
-        res = rep.getGroup(133, token)
+        res = rep.getGroup('133', token)
         self.assertEqual(res, [{'id' : 133, 'name' : 'Best Group EVER'}])
     
     def test_get_group_info_none(self):

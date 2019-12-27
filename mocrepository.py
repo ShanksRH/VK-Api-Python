@@ -1,7 +1,8 @@
+import repository
 import requests
 import json
 
-class MocRepository:
+class MocRepository(repository.Repository):
     def __init__(self, url, port=80):
         self.url = url
         self.port = port
@@ -9,7 +10,7 @@ class MocRepository:
     def get(self, rurl):
         return None
 
-class MocUsersRepository(MocRepository):
+class MocUsersRepository(repository.UsersRepository):
     def getUserFriends(self, user_id, token):
         js = []
         if user_id == 0:
@@ -32,10 +33,10 @@ class MocUsersRepository(MocRepository):
             return None
         return js
 
-class MocGroupsRepository(MocRepository):
-    def getGroup(self, group_id, token):
+class MocGroupsRepository(repository.GroupsRepository):
+    def getGroup(self, group_ids, token):
         js = {}
-        if group_id == 133:
+        if group_ids == '133':
             js = [{
                     'id' : 133,
                     'name' : 'Best Group EVER'
