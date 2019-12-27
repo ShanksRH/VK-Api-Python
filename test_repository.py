@@ -19,6 +19,15 @@ class TestRepositories(unittest.TestCase):
         res = rep.getUserFriends(0, token)
         self.assertEqual(res, [2, 3, 14])
     
+    def test_get_friends_bad_url(self):
+        rep = repository.UsersRepository('url')
+        try:
+            rep.getUserFriends(0, token)
+            self.assertTrue(False)
+            return
+        except:
+            self.assertTrue(True)
+    
     def test_get_friends_2(self):
         rep = repository.UsersRepository(url)
         res = rep.getUserFriends(2, token)
@@ -38,6 +47,11 @@ class TestRepositories(unittest.TestCase):
         rep = repository.UsersRepository(url)
         res = rep.getUserGroups(0, token)
         self.assertEqual(res, [101, 102, 103])
+    
+    def test_get_groupInfo(self):
+        rep = repository.GroupsRepository(url)
+        res = rep.getGroup(133, token)
+        self.assertEqual(res, [{'id' : 133, 'name' : 'Best Group EVER'}])
 
 if __name__ == "__main__":
     unittest.main()

@@ -7,8 +7,8 @@ class Repository:
         self.port = port
 
     def get(self, rurl):
-        response = requests.get(rurl)
         try:
+            response = requests.get(rurl)
             js = json.loads(response.text)
             return js
         except:
@@ -33,7 +33,7 @@ class UsersRepository(Repository):
 
 class GroupsRepository(Repository):
     def getGroup(self, group_id, token):
-        rurl = self.url + 'method/groups.getById?user_id=' + str(group_id) + '&v=5.61&access_token=' + token
+        rurl = self.url + 'method/groups.getById?group_id=' + str(group_id) + '&v=5.61&access_token=' + token
         res = self.get(rurl)
         try:
             return res['response']

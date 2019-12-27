@@ -108,7 +108,7 @@ def groupsget(args):
         js = {
             'response' : {
                 'count' : 4,
-                'items' : [110, 102, 113, 120]
+                'items' : [110, 102, 133, 120]
             }
         }
     else:
@@ -120,11 +120,24 @@ def groupsget(args):
         }
     return js
 
+def groupsgetbyid(args):
+    js = {}
+    if args['group_id'] == '133':
+        js = {
+            'response' : [{
+                'id' : 133,
+                'name' : 'Best Group EVER'
+            }]
+        }
+    return js
+
 def mymethod(name : str):
     if name == 'friends.get':
         return friendsget
     if name == 'groups.get':
         return groupsget
+    if name == 'groups.getById':
+        return groupsgetbyid
     pass
 
 class MyHandler(http.server.SimpleHTTPRequestHandler):
