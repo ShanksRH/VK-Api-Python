@@ -14,11 +14,27 @@ class TestMocHandler(unittest.TestCase):
         except:
             self.assertTrue(False)
     
-    def test_doget_chek_if_not_method(self):
+    def test_doget_if_not_method(self):
         response = requests.get(url + 'mothod/get.friends?user_id=0&v=5.61')
         try:
             js = json.loads(response.text)
             self.assertEqual(js['error']['error_msg'], 'should use method')
+        except:
+            self.assertTrue(False)
+    
+    def test_doget_if_unknown_method(self):
+        response = requests.get(url + 'method/get.friunds?user_id=0&v=5.61')
+        try:
+            js = json.loads(response.text)
+            self.assertEqual(js['error']['error_msg'], 'unknown method')
+        except:
+            self.assertTrue(False)
+    
+    def test_doget_if_wrong_que_sign(self):
+        response = requests.get(url + 'method/friends.get?ok?user_id=0&v=5.61')
+        try:
+            js = json.loads(response.text)
+            self.assertEqual(js['error']['error_msg'], 'incorrect number of "?"')
         except:
             self.assertTrue(False)
         

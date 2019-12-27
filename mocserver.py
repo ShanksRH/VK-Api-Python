@@ -1,6 +1,14 @@
 import http.server
 import json
 
+def friendsget():
+    pass
+
+def mymethod(name : str):
+    if name == 'friends.get':
+        return friendsget
+    pass
+
 class MyHandler(http.server.SimpleHTTPRequestHandler):
     def do_GET(self):
         if self.path == '/ping':
@@ -15,6 +23,18 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
         if len(splited) < 3 or splited[1] != 'method':
             js = { 'error' : {'error_msg' : 'should use method'} }
             response = 201
+        else:
+            splited = splited[2].split('?')
+            method = mymethod(splited[0])
+            if len(splited) != 2:
+                js = { 'error' : {'error_msg' : 'incorrect number of "?"'} }
+                response = 202
+            elif method == None:
+                js = { 'error' : {'error_msg' : 'unknown method'} }
+                response = 203
+            else:
+                js = {'others' : 'ok'}
+                response = 200
         self.send_response(response)
         self.end_headers()
         self.wfile.write(json.dumps(js).encode())
