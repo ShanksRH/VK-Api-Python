@@ -8,7 +8,16 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
             self.end_headers()
             self.wfile.write(json.dumps({'ping':'ok'}).encode())
             return
-        http.server.SimpleHTTPRequestHandler.do_GET(self)
+        splited = self.path.split('/')
+        print(splited)
+        js = {'error' : 'unknown_error'}
+        response = 199
+        if len(splited) < 3 or splited[1] != 'method':
+            js = { 'error' : {'error_msg' : 'should use method'} }
+            response = 201
+        self.send_response(response)
+        self.end_headers()
+        self.wfile.write(json.dumps(js).encode())
 
 if __name__ == "__main__":
     port = 80
