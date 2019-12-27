@@ -16,18 +16,28 @@ class TestRepositories(unittest.TestCase):
     
     def test_get_friends(self):
         rep = repository.UsersRepository(url)
-        res = rep.getUserFriends(1, token)
-        self.assertEqual(res, [1, 2, 3])
+        res = rep.getUserFriends(0, token)
+        self.assertEqual(res, [2, 3, 14])
     
     def test_get_friends_2(self):
         rep = repository.UsersRepository(url)
         res = rep.getUserFriends(2, token)
-        self.assertEqual(res, [10, 12, 33, 46])
+        self.assertEqual(res, [10, 12, 13, 46])
     
     def test_get_friends_3(self):
         rep = repository.UsersRepository(url)
-        res = rep.getUserFriends(3, token)
+        res = rep.getUserFriends(1, token)
         self.assertEqual(res, None)
+    
+    def test_get_groups(self):
+        rep = repository.UsersRepository(url)
+        res = rep.getUserGroups(1, token)
+        self.assertEqual(res, None)
+    
+    def test_get_groups_1(self):
+        rep = repository.UsersRepository(url)
+        res = rep.getUserGroups(0, token)
+        self.assertEqual(res, [101, 102, 103])
 
 if __name__ == "__main__":
     unittest.main()

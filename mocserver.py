@@ -6,21 +6,112 @@ def friendsget(args):
         'count' : 0,
         'items' : []
     }}
-    if args['user_id'] == '1':
+    if args['user_id'] == '0':
         js = {
             'response' : {
                 'count' : 3,
-                'items' : [1, 2, 3]
+                'items' : [2, 3, 14]
             }
         }
     elif args['user_id'] == '2':
         js = {
             'response' : {
                 'count' : 4,
-                'items' : [10, 12, 33, 46]
+                'items' : [10, 12, 13, 46]
             }
         }
     elif args['user_id'] == '3':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [11, 12, 13, 14]
+            }
+        }
+    else:
+        js = {
+            'error' : {
+                'error_code' : 201,
+                'error_msg' : 'permissoin denied'
+            }
+        }
+    return js
+
+def groupsget(args):
+    js = {'response' : {
+        'count' : 0,
+        'items' : []
+    }}
+    if args['user_id'] == '0':
+        js = {
+            'response' : {
+                'count' : 3,
+                'items' : [101, 102, 103]
+            }
+        }
+    elif args['user_id'] == '2':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [110, 112, 113, 146]
+            }
+        }
+    elif args['user_id'] == '3':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [110, 114, 133, 164]
+            }
+        }
+    elif args['user_id'] == '10':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [103, 102, 110, 133, 146]
+            }
+        }
+    elif args['user_id'] == '11':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [101, 112, 132, 146]
+            }
+        }
+    elif args['user_id'] == '12':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [101, 102, 103, 106]
+            }
+        }
+    elif args['user_id'] == '13':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [110, 112, 133, 146]
+            }
+        }
+    elif args['user_id'] == '14':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [106, 122, 133, 146]
+            }
+        }
+    elif args['user_id'] == '33':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [101, 121, 132, 164]
+            }
+        }
+    elif args['user_id'] == '46':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [110, 102, 113, 120]
+            }
+        }
+    else:
         js = {
             'error' : {
                 'error_code' : 201,
@@ -32,6 +123,8 @@ def friendsget(args):
 def mymethod(name : str):
     if name == 'friends.get':
         return friendsget
+    if name == 'groups.get':
+        return groupsget
     pass
 
 class MyHandler(http.server.SimpleHTTPRequestHandler):
