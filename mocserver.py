@@ -129,6 +129,13 @@ def groupsgetbyid(args):
                 'name' : 'Best Group EVER'
             }]
         }
+    else:
+        js = {
+            'error' : {
+                'error_code' : 201,
+                'error_msg' : 'permission denied'
+            }
+        }
     return js
 
 def mymethod(name : str):

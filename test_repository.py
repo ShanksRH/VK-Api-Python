@@ -48,10 +48,15 @@ class TestRepositories(unittest.TestCase):
         res = rep.getUserGroups(0, token)
         self.assertEqual(res, [101, 102, 103])
     
-    def test_get_groupInfo(self):
+    def test_get_group_info(self):
         rep = repository.GroupsRepository(url)
         res = rep.getGroup(133, token)
         self.assertEqual(res, [{'id' : 133, 'name' : 'Best Group EVER'}])
+    
+    def test_get_group_info_none(self):
+        rep = repository.GroupsRepository(url)
+        res = rep.getGroup(132, token)
+        self.assertEqual(res, None)
 
 if __name__ == "__main__":
     unittest.main()
