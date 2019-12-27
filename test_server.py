@@ -56,7 +56,7 @@ class TestMocHandler(unittest.TestCase):
             self.assertTrue(False)
     
     def test_doget_friends_ids(self):
-        args = 'user_id=0&v=5.61&access_token=' + token
+        args = 'user_id=1&v=5.61&access_token=' + token
         rurl = url + 'method/friends.get?' + args
         response = requests.get(rurl)
         try:

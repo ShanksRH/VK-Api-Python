@@ -2,11 +2,25 @@ import http.server
 import json
 
 def friendsget(args):
-    return {
-        'response' : {
-            'items' : [1, 2, 3]
+    js = {'response' : {
+        'count' : 0,
+        'items' : []
+    }}
+    if args['user_id'] == '1':
+        js = {
+            'response' : {
+                'count' : 3,
+                'items' : [1, 2, 3]
+            }
         }
-    }
+    elif args['user_id'] == '2':
+        js = {
+            'response' : {
+                'count' : 4,
+                'items' : [10, 12, 33, 46]
+            }
+        }
+    return js
 
 def mymethod(name : str):
     if name == 'friends.get':
@@ -38,23 +52,23 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 response = 201
             else:
                 splited = splited[1].split('&')
-                args = []
+                args = dict()
                 for a in splited:
                     t = a.split('=')
                     print(t)
                     if len(t) == 2:
-                        args.append(t)
+                        args[t[0]] = t[1]
                     else:
                         js = { 'error' : {'error_msg' : 'incorrect number of "=" in ' + a} }
                         response = 201
                         break
                 else:
-                    if args[-1][0] != 'access_token':
-                        js = { 'error' : {'error_msg' : 'invalid access token argument'} }
-                        response = 201
-                    else:
+                    if 'access_token' in args.keys():
                         js = method(args)
                         response = 200
+                    else:
+                        js = { 'error' : {'error_msg' : 'invalid access token argument'} }
+                        response = 201
         self.send_response(response)
         self.end_headers()
         self.wfile.write(json.dumps(js).encode())
