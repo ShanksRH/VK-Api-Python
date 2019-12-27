@@ -33,8 +33,20 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                 js = { 'error' : {'error_msg' : 'unknown method'} }
                 response = 203
             else:
-                js = {'others' : 'ok'}
-                response = 200
+                splited = splited[1].split('&')
+                args = []
+                for a in splited:
+                    t = a.split('=')
+                    print(t)
+                    if len(t) == 2:
+                        args.append(t)
+                    else:
+                        js = { 'error' : {'error_msg' : 'incorrect number of "=" in ' + a} }
+                        response = 203
+                        break
+                else:
+                    js = {'others' : 'ok'}
+                    response = 200
         self.send_response(response)
         self.end_headers()
         self.wfile.write(json.dumps(js).encode())
