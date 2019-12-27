@@ -4,6 +4,7 @@ import time
 import json
 
 url = 'http://magic.troll.me/'
+token = 'abrakadabra'
 
 class TestMocHandler(unittest.TestCase):
     def test_doget_check_ping(self):
@@ -51,6 +52,16 @@ class TestMocHandler(unittest.TestCase):
         try:
             js = json.loads(response.text)
             self.assertEqual(js['error']['error_msg'], 'invalid access token argument')
+        except:
+            self.assertTrue(False)
+    
+    def test_doget_friends_ids(self):
+        args = 'user_id=0&v=5.61&access_token=' + token
+        rurl = url + 'method/friends.get?' + args
+        response = requests.get(rurl)
+        try:
+            js = json.loads(response.text)
+            self.assertEqual(js['response']['items'], [1, 2, 3])
         except:
             self.assertTrue(False)
 

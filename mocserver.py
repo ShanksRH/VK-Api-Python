@@ -1,8 +1,12 @@
 import http.server
 import json
 
-def friendsget():
-    pass
+def friendsget(args):
+    return {
+        'response' : {
+            'items' : [1, 2, 3]
+        }
+    }
 
 def mymethod(name : str):
     if name == 'friends.get':
@@ -49,7 +53,7 @@ class MyHandler(http.server.SimpleHTTPRequestHandler):
                         js = { 'error' : {'error_msg' : 'invalid access token argument'} }
                         response = 201
                     else:
-                        js = {'others' : 'ok'}
+                        js = method(args)
                         response = 200
         self.send_response(response)
         self.end_headers()
