@@ -1,6 +1,5 @@
 import unittest
 import requests
-import time
 import json
 
 url = 'http://magic.troll.me/'
